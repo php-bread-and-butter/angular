@@ -1,0 +1,46 @@
+<div class="main-wrapper" #container>
+	<div id="burgerBtn" (click)="container.classList.toggle('navigation');"></div>
+	<ul id="nav">
+		<li>
+			<a 
+				routerLink="/" 
+				routerLinkActive="active" 
+				(click)="container.classList.remove('navigation');">Home</a>
+		</li>
+		<li *ngIf="!authService.isLoggedIn()">
+			<a 
+				routerLink="/login" 
+				routerLinkActive="active" 
+				(click)="container.classList.remove('navigation');">Login</a>
+		</li>
+		<li *ngIf="authService.isLoggedIn()">
+			<a (click)="authService.logout(); container.classList.remove('navigation');">Logout</a>
+		</li>
+		<li>
+			<a 
+				routerLink="/post" 
+				routerLinkActive="active" 
+				(click)="container.classList.remove('navigation');">Posts</a>
+		</li>
+		<li>
+			<a 
+				routerLink="/task" 
+				routerLinkActive="active" 
+				(click)="container.classList.remove('navigation');">Task</a>
+		</li>
+		<li>
+			<a 
+				routerLink="/archive" 
+				routerLinkActive="active" 
+				(click)="container.classList.remove('navigation');">Archive</a>
+		</li>
+	</ul>
+	<div class="main-container">
+		<div class="container">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>
+<footer>
+	
+</footer>

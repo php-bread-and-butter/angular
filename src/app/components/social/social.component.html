@@ -1,0 +1,16 @@
+<div class="grid-container">
+	<div class="grid-child-posts">
+		{{ loveCount }} Loves
+	</div>
+	<div class="grid-child-followers">
+		{{ likeCount }} Likes
+	</div>
+</div>
+<ul class="social-icons">
+	<li><a href="#" (click)="love($event);" [class.active]="isLoved"><i class="fa fa-heart-o"></i></a></li>
+	<li><a href="#" (click)="like($event)" [class.active]="isliked"><i class="fa fa-thumbs-o-up"></i></a></li>
+	<li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+	<li><a href="#"><i class="fa fa-comment"></i></a></li>
+</ul>
+<p>{{ postDescription | summary:[100,20]:true }}</p>
+<button class="btn draw-border">Follow</button>

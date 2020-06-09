@@ -1,0 +1,31 @@
+<div class="courses-container">
+
+	<form method="post" [formGroup]="taskForm" (ngSubmit)="createTask()">
+		<div class="row">
+			<div class="col-md-4" style="padding-right: 0;">
+				<input type="text" class="form-control" placeholder="Title" [formControlName]="'title'">
+			</div>
+			<div class="col-md-8" style="padding-left: 0;">
+				<div class="input-group">
+					<textarea class="form-control" placeholder="Description" style="height: 34px;" [formControlName]="'body'"></textarea>
+					<div class="input-group-btn">
+						<button type="submit" class="btn btn-info btn-flat">ADD</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="course" *ngFor="let task of taskList">
+		<div class="course-preview">
+			<h6></h6>
+			<h2>{{ task.title }}</h2>
+			<a href="#">View all chapters <i class="fas fa-chevron-right"></i></a>
+		</div>
+		<div class="course-info">
+			<p>{{ task.body }}</p>
+			<a [routerLink]="task.id" class="btn btn-primary pull-left">Details</a>
+			<a (click)="deleteTask(task)" class="btn btn-primary pull-right">Delete</a>
+		</div>
+	</div>
+</div>

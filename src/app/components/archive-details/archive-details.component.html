@@ -1,0 +1,30 @@
+<div class="box box-primary">
+	<div class="box-header with-border">
+		<h3 class="box-title">Photos</h3>
+		<div class="box-tools pull-right">
+			<div class="has-feedback">
+				<input type="text" class="form-control input-sm" placeholder="Search Mail" #searchKeyword (keyup)="search(searchKeyword)">
+				<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			</div>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="loader-validate text-center" *ngIf="showLoader">
+			<i class="fa fa-spinner fa-spin"></i>
+			Loading Data
+		</div>
+		<ul class="products-list product-list-in-box">
+			<li class="item" *ngFor="let photo of photos">
+				<div class="product-img">
+					<img src="{{ photo.thumbnailUrl }}" alt="Product Image">
+				</div>
+				<div class="product-info">
+					<a href="#" (click)="showDetails(photo);" class="product-title">{{ photo.title }}</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="box-footer text-center">
+		<a routerLink="/archive" class="uppercase">View All Archive</a>
+	</div>
+</div>

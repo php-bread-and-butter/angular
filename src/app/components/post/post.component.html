@@ -1,0 +1,16 @@
+<h2>{{ listPost.length }} Posts</h2>
+<div class="post-container">
+	<div class="card" *ngFor="let post of listPost">
+		<img src="{{ post.picture }}" alt="{{ post.title }}" class="card__image">
+		<p class="card__name">{{ post.title }}</p>
+		<app-social 
+			[post-id]="post.id" 
+			[love-count]="post.postCount" 
+			[is-loved]="post.isLoved"
+			[like-count]="post.likeCount" 
+			[is-liked]="post.isLiked" 
+			[description]="post.description" 
+			(on-update)="contentChanged($event);">
+		</app-social>
+	</div>
+</div>

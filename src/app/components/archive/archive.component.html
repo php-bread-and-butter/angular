@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="input-group pull-right" style="margin: 25px">
+			<div class="has-feedback">
+				<input type="text" class="form-control input-sm" placeholder="Search Mail" #searchKeyword (keyup)="search(searchKeyword)">
+				<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="loader-validate text-center" *ngIf="showLoader">
+			<i class="fa fa-spinner fa-spin"></i>
+			Loading Data
+		</div>
+		<ul class="timeline">
+			<li *ngFor="let album of albums">
+				<i class="fa fa-clock-o bg-blue"></i>
+				<div class="timeline-item">
+					<h3 class="timeline-header"><a [routerLink]="['/archive-details', album.id]">{{ album.title }}</a></h3>
+					<div class="timeline-footer">
+						<a [routerLink]="['/archive-details', album.id]" class="btn btn-primary btn-xs">Read more</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

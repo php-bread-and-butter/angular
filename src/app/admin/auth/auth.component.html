@@ -1,0 +1,172 @@
+<div class="main">
+	<section class="sign-in" *ngIf="mode=='signin'">
+		<div class="container">
+			<div class="signin-content">
+				<div class="signin-image">
+					<figure><img src="assets/images/signin-image.jpg" alt="sing up image"></figure>
+					<a (click)="mode='signup'" class="signup-image-link">Create an account</a>
+				</div>
+				<div class="signin-form">
+					<h2 class="form-title">Sign up</h2>
+					<div *ngIf="invalidLogin" class="alert alert-danger">Invalid email and/or password.</div>
+					<form method="POST" class="register-form" [formGroup]="loginForm" (ngSubmit)="signIn()">
+						<div class="form-group">
+							<label for="user_email"><i class="zmdi zmdi-email"></i></label>
+							<input type="text" id="user_email" placeholder="Email" 
+								formControlName="email" />
+						</div>
+						<div *ngIf="userEmail.touched && userEmail.invalid" class="alert-validate">
+							<div *ngIf="userEmail.errors.required">
+								Email address is required!
+							</div>
+							<div *ngIf="userEmail.errors.email">
+								Email address invalid!
+							</div>
+							<div *ngIf="userEmail.errors.noSpace">
+								Email address cannot contain space.
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="login_pass"><i class="zmdi zmdi-lock"></i></label>
+							<input type="password" name="loginPassword" id="login_pass" placeholder="Password" 
+								formControlName="password" />
+						</div>
+						<div *ngIf="userPass.touched && userPass.invalid" class="alert-validate">
+							<div *ngIf="userPass.errors.required">
+								Password is required!
+							</div>
+							<div *ngIf="userPass.errors.minlength">
+								Password should be of minimum {{ userPass.errors.minlength.requiredLength }} character!
+							</div>
+							<div *ngIf="userPass.errors.noSpace">
+								Password cannot contain space.
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="checkbox" name="rememberMe" id="remember-me" class="agree-term" 
+							formControlName="remember-me" />
+							<label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+						</div>
+						<div class="form-group form-button">
+							<input type="submit" name="signin" id="signin" class="form-submit" value="Log in" [disabled]="loginForm.invalid" />
+						</div>
+					</form>
+					<div class="social-login">
+						<span class="social-label">Or login with</span>
+						<ul class="socials">
+							<li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+							<li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+							<li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="signup" *ngIf="mode=='signup'">
+		<div class="container">
+			<div class="signup-content">
+				<div class="signup-form">
+					<h2 class="form-title">Sign up</h2>
+					<form method="POST" class="register-form" [formGroup]="signupForm" (ngSubmit)="registration()">
+						<div class="form-group">
+							<label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+							<input type="text" formControlName="full-name" id="name" placeholder="Your Name"/>
+						</div>
+						<div *ngIf="signupName.touched && signupName.invalid" class="alert-validate">
+							<div *ngIf="signupName.errors.required">
+								Name is required!
+							</div>
+							<div *ngIf="signupName.errors.minlength">
+								Name should be of minimum {{ signupName.errors.minlength.requiredLength }} character!
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email"><i class="zmdi zmdi-email"></i></label>
+							<input type="email" formControlName="email-address" id="email" placeholder="Your Email"/>
+						</div>
+						<div class="loader-validate" *ngIf="signupEmail.pending">
+							<i class="fa fa-spinner fa-spin"></i>
+							Checking for uniqueness
+						</div>
+						<div *ngIf="signupEmail.touched && signupEmail.invalid" class="alert-validate">
+							<div *ngIf="signupEmail.errors.required">
+								Email is required!
+							</div>
+							<div *ngIf="signupEmail.errors.email">
+								Email address invalid!
+							</div>
+							<div *ngIf="signupEmail.errors.uniqueEmail">
+								Email is already taken.
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="user-name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+							<input type="email" formControlName="username" id="user-name" placeholder="Your Username"/>
+						</div>
+						<div class="loader-validate" *ngIf="signupUsername.pending">
+							<i class="fa fa-spinner fa-spin"></i>
+							Checking for uniqueness
+						</div>
+						<div *ngIf="signupUsername.touched && signupUsername.invalid" class="alert-validate">
+							<div *ngIf="signupUsername.errors.required">
+								Username is required!
+							</div>
+							<div *ngIf="signupUsername.errors.minlength">
+								Username should be of minimum {{ signupUsername.errors.minlength.requiredLength }} character!
+							</div>
+							<div *ngIf="signupUsername.errors.noSpace">
+								Username cannot contain space.
+							</div>
+							<div *ngIf="signupUsername.errors.uniqueUsername">
+								Username is already taken.
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pass"><i class="zmdi zmdi-lock"></i></label>
+							<input type="password" formControlName="password" id="pass" placeholder="Password"/>
+						</div>
+						<div *ngIf="signupPassword.touched && signupPassword.invalid" class="alert-validate">
+							<div *ngIf="signupPassword.errors.required">
+								Password is required!
+							</div>
+							<div *ngIf="signupPassword.errors.pattern">
+								Password should be of minimum 8 characters and must contain atleast 1 uppercase, lowercase and special character!
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+							<input type="password" formControlName="confirm-password" id="re_pass" placeholder="Repeat your password"/>
+						</div>
+						<div *ngIf="signupConfirmPassword.touched && signupConfirmPassword.invalid" class="alert-validate">
+							<div *ngIf="signupConfirmPassword.errors.required">
+								Confirm password is required!
+							</div>
+						</div>
+						
+						<div *ngIf="signupConfirmPassword.valid && signupForm.invalid && signupForm.errors.matchConfirmPassword" class="alert-validate">
+							Confirm password doesnot match with Password.
+						</div>
+						<div class="form-group">
+							<input type="checkbox" formControlName="agree-term" id="agree-term" class="agree-term" />
+							<label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+						</div>
+						<div *ngIf="signupConfirmPassword.valid && signupAgreeTerm.invalid" class="alert-validate">
+							<div *ngIf="signupAgreeTerm.errors.required">
+								Agree terms is required!
+							</div>
+						</div>
+						<div class="form-group form-button">
+							<input type="submit" name="signup" id="signup" class="form-submit" value="Register" [disabled]="signupForm.invalid"/>
+						</div>
+					</form>
+				</div>
+				<div class="signup-image">
+					<figure><img src="assets/images/signup-image.jpg" alt="sing up image"></figure>
+					<a (click)="mode='signin'" class="signup-image-link">I am already member</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
