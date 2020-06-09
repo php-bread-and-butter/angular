@@ -8,7 +8,7 @@
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e",
-		"postinstall": "ng build --prod",
+		"postinstall": "ng build --prod --outputPath=dist/heroku/",
 		"deploy:gh": "ng build --prod --outputPath=dist/github/ --base-href=https://php-bread-and-butter.github.io/angular/ && ngh --dir dist/github/",
 		"deploy:firebase": "ng build --prod --outputPath=dist/firebase/ && firebase deploy"
 	},
@@ -49,5 +49,9 @@
 		"protractor": "~5.4.0",
 		"ts-node": "~7.0.0",
 		"tslint": "~5.15.0"
+	},
+	"engines": {
+		"node": "14.3.0",
+		"npm": "6.14.5"
 	}
 }
