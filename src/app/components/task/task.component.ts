@@ -12,6 +12,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class TaskComponent implements OnInit {
 	
 	public taskList: any[];
+	showLoader = true;
 	constructor(private service: TaskService, private fb: FormBuilder) {
 	}
 
@@ -30,7 +31,10 @@ export class TaskComponent implements OnInit {
 
 	ngOnInit() {
 		this.service.getAll()
-		.subscribe(task => this.taskList = task);
+		.subscribe(task => {
+			this.taskList = task;
+			this.showLoader = false;
+		});
 	}
 	
 	/**

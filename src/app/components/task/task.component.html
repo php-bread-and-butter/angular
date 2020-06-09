@@ -15,7 +15,10 @@
 			</div>
 		</div>
 	</form>
-
+	<div class="loader-validate text-center" *ngIf="showLoader">
+		<i class="fa fa-spinner fa-spin"></i>
+		Loading Data
+	</div>
 	<div class="course" *ngFor="let task of taskList">
 		<div class="course-preview">
 			<h6></h6>
